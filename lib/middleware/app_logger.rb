@@ -21,7 +21,7 @@ class AppLogger
         Request:    "#{env['REQUEST_METHOD']} #{env['REQUEST_PATH']}",
         Handler:    "#{env['link_parser.controller'].class}",
         Parameters: env['link_parser.params'],
-        Response:   "#{status} [#{headers['Content-Type']}]"
+        Response:   "#{status} [#{headers['Content-Type']}]",
     }
   end
 end
