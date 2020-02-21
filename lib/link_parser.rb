@@ -13,7 +13,7 @@ module LinkParser
     end
 
     def env
-      ENV.fetch('LP_ENV', 'development')
+      ENV.fetch('RACK_ENV', 'development')
     end
   end
 end
