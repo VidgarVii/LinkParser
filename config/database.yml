@@ -1,0 +1,17 @@
+default: &default
+  adapter:  'sqlite3'
+  encoding: "utf8"
+  pool: 10
+  timeout: 5000
+
+development:
+  <<: *default
+  database: 'db/dev_parser_link.sqlite3'
+
+test:
+  <<: *default
+  database: 'db/test_parser_link.sqlite3'
+
+production:
+  <<: *default
+  database: 'db/parser_link.sqlite3'
