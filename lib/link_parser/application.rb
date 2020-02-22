@@ -20,6 +20,10 @@ module LinkParser
       require_routes
     end
 
+    def routes
+
+    end
+
     private
 
     def setup_database
