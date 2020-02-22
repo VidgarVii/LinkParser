@@ -6,12 +6,14 @@ module LinkParser
   class Application
     include Singleton
 
-    def call(env)
-      request  = Rack::Request.new(env)
+    attr_reader :request
 
-      #
-      if request.post? && request.path == '/site'
+    def call(env)
+      @request = Rack::Request.new(env)
+
+      if request_valid?
         site_controller = SitesController.new(request)
+        site_controller.create
         site_controller.make_response
       else
         page_not_found
@@ -19,6 +21,10 @@ module LinkParser
     end
 
     private
+
+    def request_valid?
+      request.post? && request.path == '/site' && request.params['links'].is_a?(Array)
+    end
 
     def page_not_found
       [404, { 'Content-Type' => 'text/plain' }, ["Page Not Found"]]
