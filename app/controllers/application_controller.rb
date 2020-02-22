@@ -1,14 +1,18 @@
-class ApplicationController
-  attr_reader :params, :response
+module LinkParser
+  class ApplicationController
+    attr_reader :params, :response
 
-  def initialize(request)
-    raise "Request must be object Rack::Request, not a #{request.class}" unless request.is_a?(Rack::Request)
+    def initialize(request)
+      raise InvalidParams, "Request must be object Rack::Request, not a #{request.class}" unless request.is_a?(Rack::Request)
 
-    @params   = request.params
-    @response = Rack::Response.new
+      @params   = request.params
+      @response = Rack::Response.new
+    end
+
+    def make_response
+      response.finish
+    end
   end
 
-  def make_response
-    response.finish
-  end
+  InvalidParams = Class.new(StandardError)
 end

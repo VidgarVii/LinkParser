@@ -1,17 +1,19 @@
-class SitesController < ApplicationController
+module LinkParser
+  class SitesController < ApplicationController
 
   def create
 
-    response.write("\nSites created")
-  end
+      response.write("\nSites created")
+    end
 
-  private
+    private
 
-  def define_links?
-    params.include?('links')
-  end
+    def define_links?
+      params.include?('links')
+    end
 
-  def links
-    params['links']
+    def links
+      params['links']
+    end
   end
 end
