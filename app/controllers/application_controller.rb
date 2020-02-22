@@ -1,26 +1,14 @@
 class ApplicationController
-  attr_reader :params, :request, :response
+  attr_reader :params, :response
 
   def initialize(request)
-    @request = request
+    raise "Request must be object Rack::Request, not a #{request.class}" unless request.is_a?(Rack::Request)
+
+    @params   = request.params
     @response = Rack::Response.new
   end
 
   def make_response
-    [status, header, body]
-  end
-
-  private
-
-  def status
-    200
-  end
-
-  def header
-    {'Content-Type' => 'text/plain'}
-  end
-
-  def body
-    ["#{request.params}\n #{request.path}"]
+    response.finish
   end
 end
