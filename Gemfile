@@ -13,5 +13,6 @@ gem "otr-activerecord"  # ORM adapter
 gem 'pry', '~> 0.12.2'  # console. Use pry
 
 group :test do
-  gem 'rspec'           # unit-tests
+  gem 'rspec'             # unit-tests
+  gem 'shoulda-matchers'  # helpers for testing validation
 end

@@ -1,4 +1,5 @@
-require_relative '../lib/link_parser'
+require 'shoulda/matchers'
+require_relative '../config/environment'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -84,4 +85,14 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+
+    # Keep as many of these lines as are necessary:
+    with.library :active_record
+    with.library :active_model
+  end
 end
