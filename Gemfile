@@ -8,9 +8,11 @@ gem 'bundler'
 gem 'rake'
 gem 'rack'
 gem 'sqlite3'           # DataBase
-gem 'activerecord'
 gem "otr-activerecord"  # ORM adapter
-gem 'pry', '~> 0.12.2'  # console. Use pry
+
+group :development do
+  gem 'pry', '~> 0.12.2'  # console. Use pry
+end
 
 group :test do
   gem 'rspec'             # unit-tests

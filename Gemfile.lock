@@ -55,8 +55,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord
-  activesupport
   bundler
   otr-activerecord
   pry (~> 0.12.2)
