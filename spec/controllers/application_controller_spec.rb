@@ -1,7 +1,8 @@
 describe 'ApplicationController', type: :controller do
   subject { LinkParser::ApplicationController }
+  include_context 'shared_env'
 
-  let(:request) { Rack::Request.new(mock_env) }
+  let(:request) { Rack::Request.new(shared_env) }
 
   context 'validate params for initializing object ApplicationController' do
     it 'should be created object' do
