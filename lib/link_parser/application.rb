@@ -7,35 +7,21 @@ module LinkParser
     include Singleton
 
     def call(env)
-      [
-          200,
-          {'Content_Type' => 'text/plain'},
-          ['Hello World']
-      ]
-    end
+      request  = Rack::Request.new(env)
 
-    def bootstrap!
-      setup_database
-      require_app
-      require_routes
-    end
-
-    def routes
-
+      #
+      if request.post? && request.path == '/site'
+        site_controller = SitesController.new(request)
+        site_controller.make_response
+      else
+        page_not_found
+      end
     end
 
     private
 
-    def setup_database
-
-    end
-
-    def require_app
-
-    end
-
-    def require_routes
-
+    def page_not_found
+      [404, { 'Content-Type' => 'text/plain' }, ["Page Not Found"]]
     end
   end
 end
