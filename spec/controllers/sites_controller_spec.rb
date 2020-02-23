@@ -11,8 +11,14 @@ describe LinkParser::SitesController, type: :controller do
         expect(response.status).to eq 200
       end
 
-      it 'should return body' do
-        expect(response.body).to eq ['Data write successfully']
+      it 'should return collections sites in the body' do
+        %w[url status title].each do |attr|
+          expect(JSON.parse(response.body.first).first.keys.include?(attr)).to be_truthy
+        end
+      end
+
+      it 'should return content type - json' do
+        expect(response.header['Content-Type']).to eq 'application/json'
       end
 
       it 'should created 3 sites to DB' do

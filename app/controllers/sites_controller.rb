@@ -1,5 +1,5 @@
 module LinkParser
-  class SitesController < ApplicationController
+  class SitesController < AbstractController
 
     def create
       if define_links?
@@ -18,9 +18,10 @@ module LinkParser
         end
         threads.each(&:join)
 
-        LinkParser::Site.import(collect.to_a)
+        LinkParser::Site.import(collect.to_a, validate: true)
 
-        response.write('Data write successfully')
+        response.write(collect.to_json)
+        response.set_header('Content-Type', 'application/json')
       else
         response.write('Links undefined')
       end
