@@ -22,7 +22,7 @@ module LinkParser
 
         render :json, site_collect
       else
-        response.write('Links undefined')
+        render :json, { error: 'links undefined' }
       end
     end
 
