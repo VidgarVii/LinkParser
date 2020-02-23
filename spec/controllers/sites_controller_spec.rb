@@ -13,7 +13,7 @@ describe LinkParser::SitesController, type: :controller do
 
       it 'should return collections sites in the body' do
         %w[url status title].each do |attr|
-          expect(JSON.parse(response.body.first).first.keys.include?(attr)).to be_truthy
+          expect(JSON.parse(response.body.first).first.has_key?(attr)).to be_truthy
         end
       end
 

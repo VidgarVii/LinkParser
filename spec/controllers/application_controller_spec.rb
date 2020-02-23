@@ -3,6 +3,7 @@ describe LinkParser::AbstractController, type: :controller do
   include_context 'shared_env'
 
   let(:request) { Rack::Request.new(shared_env) }
+  let(:object) { subject.new(request) }
 
   context 'validate params for initializing object ApplicationController' do
     it 'should be created object' do
@@ -15,8 +16,6 @@ describe LinkParser::AbstractController, type: :controller do
   end
 
   describe '#make_response' do
-    let(:object) { subject.new(request) }
-
     it 'should be return array' do
       expect(object.make_response).to be_is_a(Array)
     end
@@ -31,6 +30,24 @@ describe LinkParser::AbstractController, type: :controller do
 
     it 'should contains body array' do
       expect(object.make_response.last).to be_is_a(Array)
+    end
+  end
+
+  describe '#render' do
+    context 'should prepare response' do
+      before { object.render :json, {url: 'http://site.com'} }
+
+      it 'content type should be json' do
+        expect(object.response.get_header('Content-Type')).to eq 'application/json'
+      end
+
+      it 'add content to the response body' do
+        expect(object.response.body).to eq ["{\"url\":\"http://site.com\"}"]
+      end
+    end
+
+    it 'should rescue raise error if undefined content type' do
+      expect { object.render :invalid_type, 'message' }.to raise_error LinkParser::InvalidParams
     end
   end
 end
