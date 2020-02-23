@@ -19,9 +19,9 @@ class AppLogger
   def make_log(env, status, headers)
     {
         Request:    "#{env['REQUEST_METHOD']} #{env['REQUEST_PATH']}",
-        Handler:    "#{env['link_parser.controller'].class}",
+        Handler:    "#{env['link_parser.controller']}",
         Parameters: env['link_parser.params'],
-        Response:   "#{status} [#{headers['Content-Type']}]",
+        Response:   "Status: #{status}, Header: #{headers['Content-Type']}"
     }
   end
 end

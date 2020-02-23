@@ -10,6 +10,7 @@ module LinkParser
 
     def call(env)
       @request = Rack::Request.new(env)
+      params_write_to_env
 
       if request_valid?
         site_controller = SitesController.new(request)
@@ -21,6 +22,10 @@ module LinkParser
     end
 
     private
+
+    def params_write_to_env
+      request.env['link_parser.params'] = request.params
+    end
 
     def request_valid?
       request.post? && request.path == '/site' && request.params['links'].is_a?(Array)

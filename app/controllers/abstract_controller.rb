@@ -21,6 +21,7 @@ module LinkParser
 
       response.set_header('Content-Type', CONTENT_TYPE[context_type][:type])
       response.write(content.send CONTENT_TYPE[context_type][:method])
+      request.env['link_parser.controller'] = self.class
     end
   end
 
