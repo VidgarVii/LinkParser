@@ -21,7 +21,6 @@ module LinkParser
         LinkParser::Site.import(site_collect.to_a, validate: true)
 
         render :json, site_collect
-        response.write(site_collect.size)
       else
         render :json, { error: 'links undefined' }
       end
