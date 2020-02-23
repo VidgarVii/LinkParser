@@ -1,7 +1,7 @@
 describe LinkParser::SitesController, type: :controller do
   subject { LinkParser::SitesController }
 
-  let(:post_request) { post :create, params: { links: ['https://github.com/','https://www.ruby-toolbox.com/','draw.io']} }
+  let(:post_request) { post :create, params: { 'links' => ['https://github.com/','https://www.ruby-toolbox.com/','https://draw.io'] } }
 
   describe 'POST #create' do
     before { post_request }
@@ -11,7 +11,7 @@ describe LinkParser::SitesController, type: :controller do
     end
 
     it 'should return body' do
-      expect(response.body).to eq ["\nSites created"]
+      expect(response.body).to eq ["Data write successfully"]
     end
 
     it 'should created 3 sites to DB' do
