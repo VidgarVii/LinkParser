@@ -18,9 +18,11 @@ module LinkParser
         end
         threads.each(&:join)
 
-        sites = LinkParser::Site.import(collect.to_a)
+        LinkParser::Site.import(collect.to_a)
 
         response.write('Data write successfully')
+      else
+        response.write('Links undefined')
       end
     end
 

@@ -1,21 +1,31 @@
 describe LinkParser::SitesController, type: :controller do
   subject { LinkParser::SitesController }
 
-  let(:post_request) { post :create, params: { 'links' => ['https://github.com/','https://www.ruby-toolbox.com/','https://draw.io'] } }
-
   describe 'POST #create' do
-    before { post_request }
+    let(:post_request) { post :create, params: { 'links' => ['https://github.com/','https://www.ruby-toolbox.com/','https://draw.io'] } }
 
-    it 'should return status 200' do
-      expect(response.status).to eq 200
+    context 'valid params' do
+      before { post_request }
+
+      it 'should return status 200' do
+        expect(response.status).to eq 200
+      end
+
+      it 'should return body' do
+        expect(response.body).to eq ['Data write successfully']
+      end
+
+      it 'should created 3 sites to DB' do
+        expect(LinkParser::Site.count).to eq 3
+      end
     end
 
-    it 'should return body' do
-      expect(response.body).to eq ["Data write successfully"]
-    end
+    context 'not valid params' do
+      it 'should return link undefined' do
+        post :create
 
-    it 'should created 3 sites to DB' do
-      expect(LinkParser::Site.count).to eq 3
+        expect(response.body).to eq ['Links undefined']
+      end
     end
   end
 end
