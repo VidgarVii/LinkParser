@@ -23,6 +23,12 @@ module LinkParser
       response.write(content.send CONTENT_TYPE[context_type][:method])
       request.env['link_parser.controller'] = self.class
     end
+
+    private
+
+    def http_client
+      LinkParser::Adapters::HTTPClient.instance
+    end
   end
 
   InvalidParams = Class.new(StandardError)

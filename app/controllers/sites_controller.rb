@@ -8,7 +8,7 @@ module LinkParser
 
         links.each do |link|
           threads << Thread.new(link) do |url|
-            response = Faraday.get url
+            response = http_client.get url
             site_collect << {
                 status: response.status,
                 url: url,
@@ -21,6 +21,7 @@ module LinkParser
         LinkParser::Site.import(site_collect.to_a, validate: true)
 
         render :json, site_collect
+        response.write(site_collect.size)
       else
         render :json, { error: 'links undefined' }
       end
