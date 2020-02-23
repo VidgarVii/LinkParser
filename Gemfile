@@ -18,7 +18,8 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'               # unit-tests
-  gem 'shoulda-matchers'    # helpers for testing validation
+  gem 'rspec'                          # unit-tests
+  gem 'shoulda-matchers'               # helpers for testing validation
   gem 'database_cleaner-active_record' # DB cleaner
+  gem 'fuubar'
 end
