@@ -1,12 +1,12 @@
-describe 'ApplicationController', type: :controller do
-  subject { LinkParser::ApplicationController }
+describe LinkParser::AbstractController, type: :controller do
+  subject { LinkParser::AbstractController }
   include_context 'shared_env'
 
   let(:request) { Rack::Request.new(shared_env) }
 
   context 'validate params for initializing object ApplicationController' do
     it 'should be created object' do
-      expect(subject.new(request)).to be_is_a LinkParser::ApplicationController
+      expect(subject.new(request)).to be_is_a LinkParser::AbstractController
     end
 
     it 'should be raise InvalidParams' do

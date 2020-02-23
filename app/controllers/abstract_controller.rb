@@ -1,5 +1,5 @@
 module LinkParser
-  class ApplicationController
+  class AbstractController
     attr_reader :params, :response, :request
 
     def initialize(request)
