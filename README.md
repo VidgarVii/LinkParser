@@ -9,4 +9,4 @@ Collects less information about sites
 ## Use
 
 * rackup
-* POST request to http://localhost:9292 with params [] 
+* POST request to http://localhost:9292/site with params 'links' => ['https://site.com'] 
