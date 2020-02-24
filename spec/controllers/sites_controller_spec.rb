@@ -30,7 +30,7 @@ describe LinkParser::SitesController, type: :controller do
       it 'should return link undefined' do
         post :create
 
-        expect(response.body).to eq ["{\"error\":\"links undefined\"}"]
+        expect(response.body).to eq ["{\"error\":\"Links undefined\"}"]
       end
     end
   end
