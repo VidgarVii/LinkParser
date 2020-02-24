@@ -4,12 +4,12 @@ module LinkParser
   class SiteFactory
     def initialize(links)
       @links        = links
-      @site_collect = []
+      @site_collect = { success: [], errors: []}
     end
 
     def async_create
       extract_data
-      LinkParser::Site.import(@site_collect, validate: true)
+      LinkParser::Site.import(@site_collect[:success], validate: true)
       @site_collect
     end
 
@@ -20,17 +20,17 @@ module LinkParser
 
           push_in_site_collect(response, link)
         rescue => exception
-          logger.error(exception)
+          handle_errors(exception, link)
         end
       end
-      LinkParser::Site.import(@site_collect, validate: true)
+      LinkParser::Site.import(@site_collect[:success], validate: true)
       @site_collect
     end
 
     private
 
     def push_in_site_collect(response, link)
-      @site_collect << {
+      @site_collect[:success] << {
         status: response.status,
         url:    link,
         title:  Nokogiri::HTML(response.env.response_body).title
@@ -45,10 +45,15 @@ module LinkParser
 
             push_in_site_collect(response, link)
           rescue => exception
-            logger.error(exception)
+            handle_errors(exception, link)
           end
         end
       end.each(&:join)
+    end
+
+    def handle_errors(exception, link)
+      logger_error.error(exception)
+      @site_collect[:errors] << link
     end
   end
 end

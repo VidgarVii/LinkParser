@@ -15,7 +15,16 @@ describe LinkParser::SiteFactory do
 
     it 'return data should contain public attrs' do
       %i[status title url].each do |attr|
-        expect(subject.async_create.first.key?(attr)).to be_truthy
+        expect(subject.async_create[:success].first.key?(attr)).to be_truthy
+      end
+    end
+
+    context 'handle error if ConnectionFailed' do
+      let(:bad_url) { %w[http://bad_site.ru] }
+      subject { LinkParser::SiteFactory.new(bad_url) }
+
+      it 'bad link should contain in the return data[:error]' do
+        expect(subject.async_create[:errors].first).to eq 'http://bad_site.ru'
       end
     end
   end
@@ -31,7 +40,7 @@ describe LinkParser::SiteFactory do
 
     it 'return data should contain public attrs' do
       %i[status title url].each do |attr|
-        expect(subject.create.first.key?(attr)).to be_truthy
+        expect(subject.create[:success].first.key?(attr)).to be_truthy
       end
     end
   end

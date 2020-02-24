@@ -11,3 +11,7 @@ end
 def logger
   @logger ||= Logger.new(LinkParser.root.join('log/app.log'))
 end
+
+def logger_error
+  @logger ||= Logger.new(LinkParser.root.join('log/error.log'))
+end

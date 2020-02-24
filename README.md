@@ -27,3 +27,4 @@ Runtime Benchmark for async mode (default) vs sync mode, sec
 |10          | 0,8 - 1,3 | 5-7       |
 |25          | 0,8 - 1,4 | 11-12     |
 |100         | 2 - 4     | 60-98     |
+|170         | 3 - 8     | 100-120   |

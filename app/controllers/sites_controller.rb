@@ -6,8 +6,9 @@ module LinkParser
       if define_links?
         site_factory = LinkParser::SiteFactory.new(links.uniq)
         site_collect = async_off? ? site_factory.create : site_factory.async_create
+        logger.info("Fail sites: #{site_collect[:errors]}") if site_collect[:errors].present?
 
-        render :json, site_collect
+        render :json, site_collect[:success]
       else
         render :json, { error: locale['errors']['sites']['link_undefined'] }
       end
