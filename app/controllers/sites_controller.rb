@@ -3,7 +3,8 @@ module LinkParser
 
     def create
       if define_links?
-        site_collect = LinkParser::SiteFactory.new(links.uniq).async_create
+        site_factory = LinkParser::SiteFactory.new(links.uniq)
+        site_collect = async_off? ? site_factory.create : site_factory.async_create
 
         render :json, site_collect
       else
@@ -14,11 +15,15 @@ module LinkParser
     private
 
     def define_links?
-      params.include?('links')
+      params.has_key?('links')
     end
 
     def links
       params['links']
+    end
+
+    def async_off?
+      params.has_key?('async_off')
     end
   end
 end
