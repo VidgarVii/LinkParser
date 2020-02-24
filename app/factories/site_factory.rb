@@ -30,9 +30,5 @@ module LinkParser
 
       site_collect
     end
-
-    def http_client
-      LinkParser::Adapters::HTTPClient.instance
-    end
   end
 end

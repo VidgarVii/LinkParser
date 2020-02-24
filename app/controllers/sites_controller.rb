@@ -7,7 +7,7 @@ module LinkParser
 
         render :json, site_collect
       else
-        render :json, { error: 'links undefined' }
+        render :json, { error: locale['errors']['sites']['link_undefined'] }
       end
     end
 
