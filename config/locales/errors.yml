@@ -1,0 +1,7 @@
+errors:
+  sites:
+    link_undefined: 'Links undefined'
+
+  raise:
+    content_type: 'Undefine content type for'
+    no_rack_request: 'Request must be object Rack::Request, not a'
