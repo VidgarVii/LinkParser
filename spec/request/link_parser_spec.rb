@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'LinkParser::Application', type: :request do
   include_context 'shared_env'
 

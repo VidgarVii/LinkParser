@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LinkParser
   class Content
     include Singleton
@@ -5,8 +7,9 @@ module LinkParser
     attr_reader :content
 
     def initialize
-      @content = YAML.load(File.read(
-          LinkParser.root.join('config', 'locales', 'errors.yml')))
+      @content = YAML.safe_load(File.read(
+                                  LinkParser.root.join('config', 'locales', 'errors.yml')
+                                ))
     end
   end
 end

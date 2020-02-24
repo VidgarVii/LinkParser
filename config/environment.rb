@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/link_parser'
 
 Bundler.require :default, LinkParser.env

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def locale
   LinkParser::Content.instance.content
 end

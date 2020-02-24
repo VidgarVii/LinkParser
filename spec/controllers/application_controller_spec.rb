@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe LinkParser::AbstractController, type: :controller do
   subject { LinkParser::AbstractController }
   include_context 'shared_env'
@@ -11,7 +13,7 @@ describe LinkParser::AbstractController, type: :controller do
     end
 
     it 'should be raise InvalidParams' do
-      expect{ subject.new('') }.to raise_error(LinkParser::InvalidParams, /Request must be object Rack::Request/)
+      expect { subject.new('') }.to raise_error(LinkParser::InvalidParams, /Request must be object Rack::Request/)
     end
   end
 
@@ -35,14 +37,14 @@ describe LinkParser::AbstractController, type: :controller do
 
   describe '#render' do
     context 'should prepare response' do
-      before { object.render :json, {url: 'http://site.com'} }
+      before { object.render :json, { url: 'http://site.com' } }
 
       it 'content type should be json' do
         expect(object.response.get_header('Content-Type')).to eq 'application/json'
       end
 
       it 'add content to the response body' do
-        expect(object.response.body).to eq ["{\"url\":\"http://site.com\"}"]
+        expect(object.response.body).to eq ['{"url":"http://site.com"}']
       end
     end
 

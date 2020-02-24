@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 describe LinkParser::SiteFactory do
-  let(:urls) { %w(https://yandex.ru/ https://ruby-doc.org/) }
+  let(:urls) { %w[https://yandex.ru/ https://ruby-doc.org/] }
   subject { LinkParser::SiteFactory.new(urls) }
 
   describe '#async_create' do
@@ -12,8 +14,8 @@ describe LinkParser::SiteFactory do
     end
 
     it 'return data should contain public attrs' do
-      %i(status title url).each do |attr|
-        expect(subject.async_create.first.has_key?(attr)).to be_truthy
+      %i[status title url].each do |attr|
+        expect(subject.async_create.first.key?(attr)).to be_truthy
       end
     end
   end
@@ -28,8 +30,8 @@ describe LinkParser::SiteFactory do
     end
 
     it 'return data should contain public attrs' do
-      %i(status title url).each do |attr|
-        expect(subject.create.first.has_key?(attr)).to be_truthy
+      %i[status title url].each do |attr|
+        expect(subject.create.first.key?(attr)).to be_truthy
       end
     end
   end

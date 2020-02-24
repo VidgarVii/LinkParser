@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module LinkParser
   class SiteFactory
-
     def initialize(links)
       @links        = links
       @site_collect = []

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module LinkParser
   class SitesController < AbstractController
-
     def create
       if define_links?
         site_factory = LinkParser::SiteFactory.new(links.uniq)

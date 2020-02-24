@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 describe LinkParser::SitesController, type: :controller do
   subject { LinkParser::SitesController }
 
   describe 'POST #create' do
-    let(:post_request) { post :create, params: { 'links' => ['https://github.com/','https://www.ruby-toolbox.com/','https://draw.io'] } }
+    let(:post_request) { post :create, params: { 'links' => ['https://github.com/', 'https://www.ruby-toolbox.com/', 'https://draw.io'] } }
 
     context 'valid params' do
       before { post_request }
@@ -12,8 +14,8 @@ describe LinkParser::SitesController, type: :controller do
       end
 
       it 'should return collections sites in the body' do
-        %w(url status title).each do |attr|
-          expect(JSON.parse(response.body.first).first.has_key?(attr)).to be_truthy
+        %w[url status title].each do |attr|
+          expect(JSON.parse(response.body.first).first.key?(attr)).to be_truthy
         end
       end
 
@@ -30,7 +32,7 @@ describe LinkParser::SitesController, type: :controller do
       it 'should return link undefined' do
         post :create
 
-        expect(response.body).to eq ["{\"error\":\"Links undefined\"}"]
+        expect(response.body).to eq ['{"error":"Links undefined"}']
       end
     end
   end

@@ -32,7 +32,7 @@ module LinkParser
     end
 
     def page_not_found
-      [404, { 'Content-Type' => 'text/plain' }, ["Page Not Found"]]
+      [404, { 'Content-Type' => 'text/plain' }, ['Page Not Found']]
     end
   end
 end
