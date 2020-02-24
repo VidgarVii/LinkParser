@@ -15,9 +15,13 @@ module LinkParser
 
     def create
       @links.each do |link|
-        response = http_client.get link
+        begin
+          response = http_client.get link
 
-        push_in_site_collect(response, link)
+          push_in_site_collect(response, link)
+        rescue => exception
+          logger.error(exception)
+        end
       end
       LinkParser::Site.import(@site_collect, validate: true)
       @site_collect
@@ -36,9 +40,13 @@ module LinkParser
     def extract_data
       @links.map do |link|
         Thread.new do
-          response = http_client.get link
+          begin
+            response = http_client.get link
 
-          push_in_site_collect(response, link)
+            push_in_site_collect(response, link)
+          rescue => exception
+            logger.error(exception)
+          end
         end
       end.each(&:join)
     end
